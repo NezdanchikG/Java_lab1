@@ -1,37 +1,27 @@
-import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Path;
+package ru.spbstu.telematics.java;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.Test;
 
-class AppTest {
+import java.util.List;
 
-    @Test
-    void testReadFileAndPrintContent() throws IOException {
-        // Arrange
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+import static org.junit.Assert.assertEquals;
 
-        // Act
-        App.main(new String[]{});
-
-        // Assert
-        String expectedOutput = "Your expected content from the 'input.txt' file"; // Замените на ожидаемое содержимое файла
-        assertEquals(expectedOutput, outputStream.toString().trim());
-        
-        // Clean up
-        System.setOut(System.out);
-    }
+public class AppTest {
 
     @Test
-    void testFileNotFound() {
-        // Arrange
-        String nonExistentFilePath = "nonexistent.txt";
+    public void readFile_shouldReturnCorrectValues() {
+        List<String> list = List.of(
+                "aaa",
+                "bbb",
+                "ccc",
+                "ddd",
+                "eee");
 
-        // Act and Assert
-        assertThrows(IOException.class, () -> App.main(new String[]{nonExistentFilePath}));
+        List<String> strings = App.readFile();
+
+        assertEquals(list, strings);
     }
+
 }
+
+
